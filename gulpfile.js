@@ -3,6 +3,11 @@ var gulp = require('gulp'),
   sass = require('gulp-sass'),
   autoprefixer = require('gulp-autoprefixer'),
   imagemin = require('gulp-imagemin'),
+	gulpConcat = require('gulp-concat'),
+	gulpRename = require('gulp-rename'),
+	gulpCssmin = require('gulp-minify-css'),
+	gulpUglify = require('gulp-uglify'),
+	gulpClean = require('gulp-clean'),
   reload = browserSync.reload;
 
 // 静态服务器
@@ -33,18 +38,54 @@ gulp.task('serve', function () {
 
 // scss编译后的css将注入到浏览器里实现更新
 gulp.task('sass', function () {
-  return gulp.src('app/**/*.scss')
+  gulp.src('app/**/*.scss')
     .pipe(autoprefixer({browsers: ['last 2 versions']}))  //添加css3前缀
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError)) //压缩
     .pipe(gulp.dest('assets/css'))
     .pipe(reload({ stream: true }));//把css注入浏览器
 });
 
+// css合并
+gulp.task('concat',function () {
+	gulp.src('assets/css/**/*.css')
+		.pipe(gulpConcat('main.css'))
+		.pipe(gulp.dest('dist/css'))
+		.pipe(gulpRename('main.min.css'))
+		.pipe(gulpCssmin())
+		.pipe(gulp.dest('dist/css'));
+});
+
+// js压缩
+gulp.task('script', function() {
+	gulp.src('dist/**/*.js')
+		.pipe(gulpUglify({ mangle: false }))
+		.pipe(gulp.dest('dist/'))
+})
+
+
 // 图片压缩
 gulp.task('images', function () {
-  gulp.src('assets/imgs/*')
+  gulp.src('dist/imgs/*')
     .pipe(imagemin())
     .pipe(gulp.dest('dist/imgs'))
 });
 
-gulp.task('default', ['serve', 'sass', 'images']);
+// 清除
+gulp.task('clear', function () {
+	return gulp.src('dist/**', {read: false})
+		.pipe(gulpClean());
+});
+
+// 拷贝
+gulp.task('copy',function(){
+	gulp.src(['app/**/*','assets/**/*','!app/**/*.scss'])
+		.pipe(gulp.dest('dist/app'));
+
+	gulp.src('assets/**/*')
+		.pipe(gulp.dest('dist/assets'));
+});
+
+
+gulp.task('dev', ['serve', 'sass']);
+gulp.task('test');
+gulp.task('build', ['sass', 'clear', 'copy','script','images']);
