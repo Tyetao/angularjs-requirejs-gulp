@@ -76,7 +76,8 @@
     │   └── index.js //运行任务中生成的环境配置文件
     └── index.html
 ```
- 
+### 环境依赖
+node.js
 ### 下载
 
 git clone https://github.com/Tyetao/angularjs-requirejs-gulp.git
