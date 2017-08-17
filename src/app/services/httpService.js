@@ -1,5 +1,5 @@
 define(['require'], function (require) {
-  var app = require('../app');
+  var app = require('app/app');
   app.factory('httpService', ['$http', 'apiUrl', '$q', function ($http, apiUrl, $q) {
     return {
       get: function (parmas) {

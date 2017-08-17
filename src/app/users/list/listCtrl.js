@@ -1,5 +1,5 @@
 define(['require', 'css!/assets/css/users/users'], function (require) {
-  var app = require('../../app');
+  var app = require('app/app');
 
   // 动态加载服务，或者添加到ui-路由器状态配置的依赖项中
   // require('../services/usersService');

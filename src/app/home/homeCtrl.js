@@ -1,8 +1,8 @@
 define([
   'require',
   'css!/assets/css/home/home',
-], function(require,nav, aside) {
-  var app = require('../app');
+], function(require) {
+  var app = require('app/app');
   app.controller('homeCtrl',['$scope',function($scope) {
     
   }]);

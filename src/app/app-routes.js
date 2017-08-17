@@ -1,5 +1,5 @@
 define(function (require) {
-  var app = require('./app');
+  var app = require('app/app');
 
   app.run(['$state', '$stateParams', '$rootScope', function ($state, $stateParams, $rootScope) {
     $rootScope.$state = $state;
