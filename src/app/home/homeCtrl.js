@@ -5,5 +5,5 @@ define([
   var app = require('../app');
   app.controller('homeCtrl',['$scope',function($scope) {
     
-  }])
+  }]);
 });

@@ -5,5 +5,5 @@ define([
   var app = require('../../app');
   app.controller('navCtrl',['$scope',function($scope) {
     
-  }])
+  }]);
 });
