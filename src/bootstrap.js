@@ -1,6 +1,5 @@
 require.config({
   baseUrl: './',
-  waitSeconds: 0,
   paths: {
     'text': 'node_modules/text/text',
     'css': 'node_modules/require-css/css.min',

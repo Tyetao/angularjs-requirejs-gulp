@@ -8,6 +8,7 @@ define(function (require) {
 
   app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
+    //解决缓存
     if (!$httpProvider.defaults.headers.get) {
       $httpProvider.defaults.headers.get = {};
     }
