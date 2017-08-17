@@ -1,5 +1,5 @@
 ## angularjs-requirejs-gulp按需加载
-支持加载angularjs组件:
+### 支持加载angularjs组件:
 * `app.controller`
 * `app.services`
 * `app.filter`
@@ -8,7 +8,7 @@
 * `app.constant`
 * `app.provider`
 * `app.decorator`
-##  项目目录
+### 项目目录
 
 ```markdown
 ├── README.md
