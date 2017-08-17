@@ -8,7 +8,8 @@
 * `app.constant`
 * `app.provider`
 * `app.decorator`
-##项目目录
+##  项目目录
+
 ```markdown
 ├── README.md
 ├── config
@@ -75,14 +76,17 @@
     │   └── index.js //运行任务中生成的环境配置文件
     └── index.html
 ```
+ 
+### 下载
 
-###下载
 git clone https://github.com/Tyetao/angularjs-requirejs-gulp.git
 
-###安装依赖
+### 安装依赖
+
 npm install
 
-###运行
+### 运行
+
 gulp dev --env dev(开发环境)
 gulp test --env test(测试环境)
 gulp build --enc production(开发环境)
