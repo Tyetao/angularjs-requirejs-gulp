@@ -1,8 +1,7 @@
 define([
-  'require',
+  'app/app',
   'css!/assets/css/components/nav/nav',
-], function(require,nav) {
-  var app = require('app/app');
+], function(app) {
   app.controller('navCtrl',['$scope',function($scope) {
     
   }]);

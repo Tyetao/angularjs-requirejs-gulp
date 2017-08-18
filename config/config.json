@@ -9,7 +9,7 @@
     "apiUrl": "https://testadmin.1sju.com/yishuju-admin/",
     "imgUrl": "https://testadmin.1sju.com/uploadFile/"
   },
-  "production": {
+  "prod": {
     "env": "prod.env",
     "apiUrl": "https://admin.1sju.com/yishuju-admin/",
     "imgUrl": "https://admin.1sju.com/uploadFile/"

@@ -1,8 +1,7 @@
 define([
-  'require',
+  'app/app',
   'css!/assets/css/components/aside/aside',
-], function(require,aside) {
-  var app = require('app/app');
+], function(app) {
   app.controller('asideCtrl',['$scope',function($scope) {
     
   }]);

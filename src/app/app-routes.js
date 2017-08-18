@@ -1,5 +1,4 @@
-define(function (require) {
-  var app = require('app/app');
+define(['app/app'],function (app) {
 
   app.run(['$state', '$stateParams', '$rootScope', function ($state, $stateParams, $rootScope) {
     $rootScope.$state = $state;
@@ -8,16 +7,11 @@ define(function (require) {
 
   app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
-    //解决缓存
-    if (!$httpProvider.defaults.headers.get) {
-      $httpProvider.defaults.headers.get = {};
-    }
-    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
-    $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
-    $httpProvider.defaults.headers.get.Pragma = 'no-cache';
+    var timestamp = new Date().getTime();//定义时间戳用于清除浏览器缓存
+
     $httpProvider.defaults.headers.withCredentials = true;
 
-    $urlRouterProvider.otherwise('/admin/users');
+    $urlRouterProvider.otherwise('/admin/chat');
 
     $stateProvider
 
@@ -25,26 +19,31 @@ define(function (require) {
       url: '/admin',
       views: {
         '': {
-          templateUrl: 'app/home/home.html',
+          templateUrl: 'app/home/home.html?timestamp=' + timestamp,
           controllerUrl: 'app/home/homeCtrl',
           controller: 'homeCtrl'
         },
         'nav@admin': {
-          templateUrl: 'app/components/nav/nav.html',
+          templateUrl: 'app/components/nav/nav.html?timestamp=' + timestamp,
           controllerUrl: 'app/components/nav/navCtrl',
           controller: 'navCtrl'
         },
         'aside@admin': {
-          templateUrl: 'app/components/aside/aside.html',
+          templateUrl: 'app/components/aside/aside.html?timestamp=' + timestamp,
           controllerUrl: 'app/components/aside/asideCtrl',
           controller: 'asideCtrl'
         }
       }
     })
+    .state('admin.chat', {
+      url: '/chat',
+      templateUrl: 'app/chat/chat.html?timestamp=' + timestamp, //模板地址
+      controllerUrl: 'app/chat/chatCtrl', //控制器地址
+      controller: 'chatCtrl'  //控制器名称
+    })
     .state('admin.users', {
       url: '/users',
-      templateUrl: 'app/users/list/list.html',
-      // ajax负载控制器的新属性
+      templateUrl: 'app/users/list/list.html?timestamp=' + timestamp,
       controllerUrl: 'app/users/list/listCtrl',
       controller: 'listCtrl',
       // 加载更多的控制器、服务和过滤器, ...
@@ -52,7 +51,7 @@ define(function (require) {
     })
     .state('admin.orderList', {
       url: '/orderList',
-      templateUrl: 'app/orders/list/list.html',
+      templateUrl: 'app/orders/list/list.html?timestamp=' + timestamp,
       controllerUrl: 'app/orders/list/listCtrl',
       controller: 'ordersListCtrl'
     });

@@ -14,6 +14,7 @@ const gulp = require('gulp'),
   ngConstant = require('gulp-ng-constant'),
   gulpif = require('gulp-if'),
   minimist = require('minimist'),
+  rjs = require('requirejs'),
   reload = browserSync.reload;
 
 // 静态服务器
@@ -42,7 +43,7 @@ gulp.task('serve', () => {
   });
 
   gulp.watch('src/app/**/*.scss', ['sass']);
-  gulp.watch('src/app/**/*').on('change', reload);
+  gulp.watch('src/app/**/*', ['lint']).on('change', reload);
 });
 
 // scss编译后的css将注入到浏览器里实现更新
@@ -109,6 +110,7 @@ gulp.task('clear', () => {
   .pipe(gulpClean());
 });
 
+//清除开发环境的配置
 gulp.task('clearDev', () => {
   return gulp.src('./src/config/*.js')
   .pipe(gulpClean());
@@ -140,12 +142,22 @@ gulp.task('env', () => {
     stream: true,
     wrap: 'amd'
   })
-  .pipe(gulpif(options.env === 'production', gulpUglify()))
+  .pipe(gulpif(options.env === 'prod', gulpUglify()))
   .pipe(gulpRename('index.js'))
-  .pipe(gulpif(options.env !== 'dev',gulp.dest('dist/config'),gulp.dest('src/config')));
+  .pipe(gulpif(options.env !== 'dev', gulp.dest('dist/config'), gulp.dest('src/config')));
 });
 
+gulp.task('rjs', function(){
+  return rjs.optimize({
+    baseUrl: "./src",
+    mainConfigFile:"./bootstrap.js",
+    name:'main',
+    out:'./dist/main.js'
+  })
+});
+
+
 gulp.task('default', ['dev']);
-gulp.task('dev', gulpSequence('clearDev', 'env', 'sass', 'lint','serve'));//开发环境
+gulp.task('dev', gulpSequence('clearDev', 'env', 'sass', 'lint', 'serve'));//开发环境
 gulp.task('test', gulpSequence('clear', 'env', 'sass', 'copy'));//测试环境
 gulp.task('build', gulpSequence('clear', 'env', 'sass', 'copy', 'htmlmin', 'script', 'images'));//生产环境
