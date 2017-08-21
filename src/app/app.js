@@ -3,7 +3,7 @@ define([
   'angular',
   'angular-ui-router',
   'angular-async-loader',
-  'config/index',
+  'config',
   'exports',
   'module'
 ], function (require, angular, uiRouter, asyncLoader, dev, exports, module) {

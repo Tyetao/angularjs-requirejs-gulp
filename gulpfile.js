@@ -159,5 +159,5 @@ gulp.task('rjs', function(){
 
 gulp.task('default', ['dev']);
 gulp.task('dev', gulpSequence('clearDev', 'env', 'sass', 'lint', 'serve'));//开发环境
-gulp.task('test', gulpSequence('clear', 'env', 'sass', 'copy'));//测试环境
-gulp.task('build', gulpSequence('clear', 'env', 'sass', 'copy', 'htmlmin', 'script', 'images'));//生产环境
+gulp.task('test', gulpSequence('clear', 'sass', 'copy', 'env'));//测试环境
+gulp.task('build', gulpSequence('clear', 'sass', 'copy', 'htmlmin', 'script', 'images','env'));//生产环境
