@@ -88,6 +88,6 @@ npm install
 
 ### 运行
 
-* gulp dev --env dev(开发环境) 
-* gulp test --env test(测试环境) 
-* gulp build --env production(开发环境) 
+* npm run dev (开发环境) 
+* npm run test (测试环境) 
+* npm run prod (开发环境) 
