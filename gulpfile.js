@@ -14,7 +14,6 @@ const gulp = require('gulp'),
   ngConstant = require('gulp-ng-constant'),
   gulpif = require('gulp-if'),
   minimist = require('minimist'),
-  rjs = require('requirejs'),
   reload = browserSync.reload;
 
 // 静态服务器
@@ -116,7 +115,6 @@ gulp.task('clearDev', () => {
   .pipe(gulpClean());
 });
 
-
 // 拷贝
 gulp.task('copy', () => {
   return gulp.src(['src/**/*', '!src/**/*.scss'])
@@ -129,7 +127,6 @@ gulp.task('lint', () => {
   .pipe(jshint())
   .pipe(jshint.reporter('default'));
 });
-
 
 // 设置环境
 gulp.task('env', () => {
@@ -146,18 +143,49 @@ gulp.task('env', () => {
   .pipe(gulpRename('index.js'))
   .pipe(gulpif(options.env !== 'dev', gulp.dest('dist/config'), gulp.dest('src/config')));
 });
-
-gulp.task('rjs', function(){
-  return rjs.optimize({
-    baseUrl: "./src",
-    mainConfigFile:"./bootstrap.js",
-    name:'main',
-    out:'./dist/main.js'
-  })
+//im
+var jsArr = [
+  'src/IM/im/js/angular-sanitize.min.js',
+  'src/IM/3rd/Web_SDK_Base_v2.8.0.js',
+  'src/IM/3rd/Web_SDK_NIM_v2.8.0.js',
+  'src/IM/3rd/jquery-1.11.3.min.js',
+  'src/IM/3rd/jquery-1.11.3.min.js',
+  'src/IM/im/js/3rd/jquery-ui.min.js',
+  'src/IM/im/js/config.js',
+  'src/IM/im/js/emoji.js',
+  'src/IM/im/js/util.js?v=2',
+  'src/IM/im/js/cache.js?v=2',
+  'src/IM/im/js/link.js',
+  'src/IM/im/js/ui.js?v=2',
+  'src/IM/im/js/widget/uiKit.js?v=2',
+  'src/IM/im/js/module/base.js',
+  'src/IM/im/js/module/message.js',
+  'src/IM/im/js/module/sysMsg.js',
+  'src/IM/im/js/module/personCard.js',
+  'src/IM/im/js/module/session.js',
+  'src/IM/im/js/module/friend.js',
+  'src/IM/im/js/module/team.js',
+  'src/IM/im/js/module/cloudMsg.js',
+  'src/IM/im/js/module/notification.js',
+  'src/IM/im/js/main.js?v=2'
+];
+gulp.task("imJsConcat",['imCssConcat'] , function () {
+  return gulp.src(jsArr)
+  .pipe(gulpConcat('main.js'))
+  .pipe(gulpRename('im.min.js'))
+  .pipe(gulpUglify())
+  .pipe(gulp.dest('src/app/im/js'));
+});
+gulp.task("imCssConcat", function () {
+  return gulp.src(['src/IM/im/css/*.css','src/IM/im/css/**/*.css'])
+  .pipe(gulpConcat('im.css'))
+  .pipe(gulpRename('im.min.css'))
+  .pipe(gulpCssmin())
+  .pipe(gulp.dest('src/app/im/css'));
 });
 
 
 gulp.task('default', ['dev']);
-gulp.task('dev', gulpSequence('clearDev', 'env', 'sass', 'lint', 'serve'));//开发环境
+gulp.task('dev', gulpSequence('clearDev', 'env', 'sass', 'serve'));//开发环境//, 'lint'
 gulp.task('test', gulpSequence('clear', 'sass', 'copy', 'env'));//测试环境
-gulp.task('build', gulpSequence('clear', 'sass', 'copy', 'htmlmin', 'script', 'images','env'));//生产环境
+gulp.task('build', gulpSequence('clear', 'sass', 'copy', 'htmlmin', 'script', 'images', 'env'));//生产环境

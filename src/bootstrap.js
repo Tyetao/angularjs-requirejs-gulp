@@ -23,7 +23,7 @@ require.config({
   urlArgs: 'timestamp=' + new Date().getTime() //防止缓存
 });
 
-require(['angular', 'jquery', './app/app-routes'], function (angular) {
+require(['angular', 'jquery', './app/app-routes','css!/assets/css/components/theme/main'], function (angular,$,router,im) {
   angular.element(document).ready(function () {
     angular.bootstrap(document, ['app']);
     angular.element(document).find('html').addClass('ng-app');

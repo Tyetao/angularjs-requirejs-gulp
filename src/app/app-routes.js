@@ -1,4 +1,4 @@
-define(['app/app'],function (app) {
+define(['app/app'], function (app) {
 
   app.run(['$state', '$stateParams', '$rootScope', function ($state, $stateParams, $rootScope) {
     $rootScope.$state = $state;
@@ -11,7 +11,7 @@ define(['app/app'],function (app) {
 
     $httpProvider.defaults.headers.withCredentials = true;
 
-    $urlRouterProvider.otherwise('/admin/chat');
+    $urlRouterProvider.otherwise('/login');
 
     $stateProvider
 
@@ -35,25 +35,43 @@ define(['app/app'],function (app) {
         }
       }
     })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'app/login/login.html?timestamp=' + timestamp,
+      controllerUrl: 'app/login/login',
+      controller: 'loginCtrl'
+    })
     .state('admin.chat', {
       url: '/chat',
       templateUrl: 'app/chat/chat.html?timestamp=' + timestamp, //模板地址
       controllerUrl: 'app/chat/chatCtrl', //控制器地址
       controller: 'chatCtrl'  //控制器名称
     })
-    .state('admin.users', {
-      url: '/users',
-      templateUrl: 'app/users/list/list.html?timestamp=' + timestamp,
-      controllerUrl: 'app/users/list/listCtrl',
+    .state('admin.account', {
+      url: '/account',
+      templateUrl: 'app/account/list.html?timestamp=' + timestamp,
+      controllerUrl: 'app/account/listCtrl',
       controller: 'listCtrl',
       // 加载更多的控制器、服务和过滤器, ...
-      dependencies: ['app/services/httpService']
+      dependencies: ['app/components/services/httpService']
     })
     .state('admin.orderList', {
       url: '/orderList',
       templateUrl: 'app/orders/list/list.html?timestamp=' + timestamp,
       controllerUrl: 'app/orders/list/listCtrl',
       controller: 'ordersListCtrl'
+    })
+    .state('admin.orderConfig', {
+      url: '/orderConfig',
+      templateUrl: 'app/orderConfig/index.html?timestamp=' + timestamp,
+      controllerUrl: 'app/orderConfig/index',
+      controller: 'orderConfigCtrl'
+    })
+    .state('admin.qualityOrder', {
+      url: '/qualityOrder',
+      templateUrl: 'app/qualityOrder/list/list.html?timestamp=' + timestamp,
+      controllerUrl: 'app/qualityOrder/list/list',
+      controller: 'qualityOrderListCtrl'
     });
   }]);
 });

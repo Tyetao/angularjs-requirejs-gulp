@@ -7,7 +7,7 @@ define([
   // require('../services/usersService');
 
   app.controller('listCtrl', ['$scope', function ($scope) {
-
+    $scope.name = 'taotao';
     // 获取服务
     // var httpService = app.get('httpService');
     //

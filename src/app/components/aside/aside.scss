@@ -1,7 +1,101 @@
-.aside{
-  height: 200px;
-  width: 100px;
-  background: black;
-  color: #fff;
-  float: left;
+._aside {
+  .logo-contaier {
+    text-align: center;
+    img {
+      margin: 50px 0;
+    }
+  }
+  div.xj_aside_top {
+    text-align: center;
+  }
+  div.xj_aside_top img {
+    margin: 50px 0;
+  }
+  ul.xj_aside_list {
+    overflow: hidden;
+  }
+  ul.xj_aside_list > li.xj_aside_list_item {
+    border-top: 1px solid #868dac;
+    box-sizing: border-box;
+    float: left;
+    width: 100%; /*padding-left: 20%;*/
+    transition: all 0.3s;
+    box-sizing: border-box;
+  }
+  ul.xj_aside_list > li.lihover {
+    background: #5b648f;
+  }
+  ul.xj_aside_list li.xj_aside_list_item a {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    line-height: 50px;
+    padding: 0 10%;
+    box-sizing: border-box;
+    color: #a5aac2;
+    font-size: 14px;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  ul.xj_aside_list li.xj_aside_list_item a:hover {
+    color: #fff;
+  }
+  ul.xj_aside_list li.xj_aside_list_item a font {
+    height: 52px;
+    display: inline-block;
+  }
+  ul.xj_aside_list li.xj_aside_list_item a b {
+    position: absolute;
+    transition: transform 0.2s linear;
+    margin-top: -12px;
+    right: 10%;
+    top: 50%;
+    display: inline-block;
+    font-size: 22px;
+  }
+  ul.xj_aside_list li.xj_aside_list_item a b:hover {
+    transform: rotate(180deg);
+    transform-origin: 50% 50%
+  }
+  ul.xj_aside_list li.xj_aside_list_item i:before {
+    font-size: 14px;
+    margin-right: 10px;
+  }
+
+  ul.xj_aside_list_item_ch {
+    display: none;
+  }
+
+  ul.xj_aside_list li.xj_aside_list_item ul.xj_aside_list_item_ch li {
+    border-top: 0;
+    padding-left: 6px;
+    height: 52px;
+  }
+  ul.xj_aside_list li.xj_aside_list_item ul.xj_aside_list_item_ch {
+    background-color: #5b648f
+  }
+  ul.xj_aside_list li.xj_aside_list_item ul.xj_aside_list_item_ch li a {
+    height: 52px;
+  }
+  ul.xj_aside_list li.xj_aside_list_item ul.xj_aside_list_item_ch li {
+    border-top: 0;
+    padding-left: 6px;
+    height: 52px;
+  }
+  ul.xj_aside_list li.xj_aside_list_item ul.xj_aside_list_item_ch {
+    background-color: #5b648f
+  }
+  ul.xj_aside_list li.xj_aside_list_item ul.xj_aside_list_item_ch li a {
+    height: 52px;
+  }
+
+  .xj_aside_list_item_ch .xj_aside_list_item .tyt-aside-treeLine {
+    background-image: url(/assets/imgs/saaa.png);
+    width: 19px;
+    height: 52px;
+    overflow: hidden;
+    float: left;
+    display: inline-block;
+    margin-right: 4px;
+  }
 }

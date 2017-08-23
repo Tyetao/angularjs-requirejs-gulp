@@ -1,0 +1,46 @@
+<div class="login">
+    <img class="loginImg" src="assets/imgs/login.png"/>
+    <div class="loginDiv">
+        <form name="loginForm" ng-submit="login()" role="form">
+            <div class="account com">
+                <label class="accountA"></label>
+                <input id="username" placeholder="用户名" type="text" name="username" ng-minlength="3" ng-maxlength="10"
+                       required/>
+                <span class="error"
+                      ng-show="loginForm.username.$invalid && !loginForm.username.$pristine && !loginForm.username.$error.minlength && !loginForm.username.$error.maxlength">用户名不能为空</span>
+                <span class="error" ng-show="loginForm.username.$error.minlength" class="help-block">用户名最短为3</span>
+                <span class="error" ng-show="loginForm.username.$error.maxlength" class="help-block">用户名最长为10</span>
+            </div>
+
+            <div class="account com">
+                <label class="accountP"></label>
+                <input placeholder="密码" id="password" type="password" name="password" ng-minlength="6" ng-maxlength="10"
+                       required/>
+                <span class="error"
+                      ng-show="loginForm.password.$invalid && !loginForm.password.$pristine && !loginForm.password.$error.minlength && !loginForm.password.$error.maxlength">用户名不能为空</span>
+                <span class="error" ng-show="loginForm.password.$error.minlength" class="help-block">密码最短为6</span>
+                <span class="error" ng-show="loginForm.password.$error.maxlength" class="help-block">密码最长为10</span>
+            </div>
+
+            <div class="account com verification">
+                <div class="verification-l">
+                    <label class="accountV"></label>
+                    <input id="userLoginCode" placeholder="验证码" type="text" name="verifcation" required=""/>
+                    <span class="error"
+                          ng-show="loginForm.verifcation.$error.required && !loginForm.verifcation.$pristine">验证码不能为空</span>
+                </div>
+                <div class="verification-r" ng-click="getCodeImg()" style="">
+                    <img id="showCodeImg"/>
+                </div>
+            </div>
+
+            <span class="autoSpan">
+            <label class="input_checkbox">
+                <input ng-model="selected.auto" type="checkbox">
+                <b>&nbsp;</b>下次自动登录(一周内)
+            </label>
+        </span>
+            <input type="submit" class="loginBtn" value="登录" ng-disabled="loginForm.$invalid">
+        </form>
+    </div>
+</div>
