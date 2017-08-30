@@ -4,7 +4,7 @@
         <form name="loginForm" ng-submit="login()" role="form">
             <div class="account com">
                 <label class="accountA"></label>
-                <input id="username" placeholder="用户名" type="text" name="username" ng-minlength="3" ng-maxlength="10"
+                <input id="username" ng-model="username" placeholder="用户名" type="text" name="username" ng-minlength="3" ng-maxlength="10"
                        required/>
                 <span class="error"
                       ng-show="loginForm.username.$invalid && !loginForm.username.$pristine && !loginForm.username.$error.minlength && !loginForm.username.$error.maxlength">用户名不能为空</span>
@@ -14,7 +14,7 @@
 
             <div class="account com">
                 <label class="accountP"></label>
-                <input placeholder="密码" id="password" type="password" name="password" ng-minlength="6" ng-maxlength="10"
+                <input placeholder="密码" ng-model="password" id="password" type="password" name="password" ng-minlength="6" ng-maxlength="10"
                        required/>
                 <span class="error"
                       ng-show="loginForm.password.$invalid && !loginForm.password.$pristine && !loginForm.password.$error.minlength && !loginForm.password.$error.maxlength">用户名不能为空</span>
@@ -25,7 +25,7 @@
             <div class="account com verification">
                 <div class="verification-l">
                     <label class="accountV"></label>
-                    <input id="userLoginCode" placeholder="验证码" type="text" name="verifcation" required=""/>
+                    <input id="userLoginCode"  ng-model="verifcation" placeholder="验证码" type="text" name="verifcation" required=""/>
                     <span class="error"
                           ng-show="loginForm.verifcation.$error.required && !loginForm.verifcation.$pristine">验证码不能为空</span>
                 </div>
